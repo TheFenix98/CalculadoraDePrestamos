@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de prestamos</title>
+    <link rel="stylesheet" href="./styles/main.css">
 </head>
 <body>
+    <h1>Calculadora de prestamos segun metodo de amortizacion frances</h1>
+    <form id="miFormulario">
+        <label for="monto_prestamo">Monto del Préstamo:</label>
+        <input type="number" id="monto_prestamo" name="monto_prestamo" required>
+        <label for="cantidad_cuotas">Cantidad de Cuotas:</label>
+    <select id="cantidad_cuotas" name="cantidad_cuotas">
+        <option value="6">6 cuotas</option>
+        <option value="12">12 cuotas</option>
+        <option value="18">18 cuota</option>
+        <option value="24">24 cuotas</option>
+    </select>
+    <input type="submit" value="Calcular">
+</form>
+<h6>La tasa con la que se calcula el credito es del 5%</h6>
+    
+
+
     <script src="./main.js"> </script>
 </body>
 </html>
 
-<h1>Calculadora de prestamos segun metodo de amortizacion frances</h1>
