@@ -13,14 +13,21 @@
         <input type="number" id="monto_prestamo" name="monto_prestamo" required>
         <label for="cantidad_cuotas">Cantidad de Cuotas:</label>
     <select id="cantidad_cuotas" name="cantidad_cuotas">
-        <option value="6">6 cuotas</option>
+        <option value=""> -----</option>
         <option value="12">12 cuotas</option>
-        <option value="18">18 cuota</option>
+        <option value="18">18 cuotas</option>
         <option value="24">24 cuotas</option>
+        <option value="36">36 cuotas</option>
+        <option value="48">48 cuotas</option>
     </select>
-    <input type="submit" value="Calcular">
+    <label for="Tasa_de_interes">Tasa de interes</label> 
+    <div>
+        <input type="number" id="tasa_de_interes" name="Tasa_de_interes">
+        <span>%</span>
+    </div>
+    <input id="boton" type="submit" value="Calcular">
 </form>
-<h6>La tasa con la que se calcula el credito es del 5%</h6>
+
     
 
 

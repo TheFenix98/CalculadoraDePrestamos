@@ -1,10 +1,10 @@
-const tasaDeInteres = 0.05;
 let cuota = 0; // Declaración de cuota fuera del evento submit
 
 document.getElementById("miFormulario").addEventListener("submit", function(event) {
     event.preventDefault();
     const prestamo = parseInt(document.getElementById("monto_prestamo").value);
     const periodo = parseInt(document.getElementById("cantidad_cuotas").value);
+    const tasaDeInteres = document.getElementById("tasa_de_interes").value/100
 
     while (prestamo < 100000) {
         if (prestamo < 100000) {

@@ -1,0 +1,41 @@
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+form input{
+    margin-bottom: 5px;
+}
+
+#boton{
+    margin-top: 10px;
+    width: 25%;
+    background-color: red;
+    color: aliceblue;
+    border-radius: 10%;
+    border-color: red;
+}
+body{
+    background-color: darkblue;
+}
+
+label{
+    color: aliceblue;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h1{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    color:aliceblue;
+}
+
+#tasa_de_interes{
+    width: 40px;
+}
+
+span{
+    color: aliceblue;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
