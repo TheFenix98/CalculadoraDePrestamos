@@ -39,3 +39,12 @@ span{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
+p{
+    font-size: 10px;
+    color: aliceblue;
+}
+
+.monto{
+    display: flex;
+    flex-direction: column;
+}

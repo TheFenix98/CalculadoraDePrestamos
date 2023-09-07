@@ -9,8 +9,11 @@
 <body>
     <h1>Calculadora de prestamos segun metodo de amortizacion frances</h1>
     <form id="miFormulario">
-        <label for="monto_prestamo">Monto del Préstamo:</label>
-        <input type="number" id="monto_prestamo" name="monto_prestamo" required>
+        <div class="monto">
+            <label for="monto_prestamo">Monto del Préstamo:</label>
+            <input type="number" id="monto_prestamo" name="monto_prestamo" required>
+            <p>*El monto del prestamo debe ser de $100.000 como minimo</p>
+        </div>
         <label for="cantidad_cuotas">Cantidad de Cuotas:</label>
     <select id="cantidad_cuotas" name="cantidad_cuotas">
         <option value=""> -----</option>
