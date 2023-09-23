@@ -48,3 +48,21 @@ p{
     display: flex;
     flex-direction: column;
 }
+
+table{
+    border-collapse: collapse;
+}
+
+th{
+    border: 5px solid white;
+    padding: 8px;
+    text-align: center;
+    color: aliceblue;
+}
+
+td{ border: 5px solid white;
+    padding: 8px;
+    text-align: center;
+    color: aliceblue;
+    
+}
