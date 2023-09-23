@@ -10,7 +10,7 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
         tasaDeInteres: document.getElementById("tasa_de_interes").value / 100,
         
     }
-
+    let capitalIniciialMostado= "$ " + prestamo.prestamoPedido
     if (prestamo.prestamoPedido < 100000) {
         alert("El monto ingresado debe ser mayor a $100,000. Intente de nuevo");
         return; // Salir de la función si no se cumple la condición
@@ -33,7 +33,7 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
     const tasaPeriodica = prestamo.tasaDeInteres / 12;
     
     const tabla = document.getElementById("cuadroAmortizacion")
-    tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr><tr><td>0</td><td>-</td><td>-</td><td>-</td><td>"+ prestamo.prestamoPedido+ "</td></tr>"
+    tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr><tr><td>0</td><td>-</td><td>-</td><td>-</td><td>"  + capitalIniciialMostado+ "</td></tr>"
 
     
 
