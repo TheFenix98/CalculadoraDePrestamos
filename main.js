@@ -8,7 +8,7 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
         prestamoPedido: parseInt(document.getElementById("monto_prestamo").value),
         periodo: parseInt(document.getElementById("cantidad_cuotas").value),
         tasaDeInteres: document.getElementById("tasa_de_interes").value / 100,
-        tablaDeAmortizacion: []
+        
     }
 
     if (prestamo.prestamoPedido < 100000) {
@@ -37,21 +37,23 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
 
 
     let capitalVivo = prestamo.prestamoPedido;
-
+    // este for hace los calculos correspondientes y los mete en un array
     for (let i = 1; i <= prestamo.periodo; i++) {
         let numeroCuota = i;
 
-
+        //duplique las variables para que los calculos se hagan teniendo en cuenta todos los decimales y poder obtener un reseltado exacto
+        // en la tabla se muestran los resultados redondeados a 2 decimales para una mejor visualizacion
         let interes = capitalVivo * tasaPeriodica;
-        interes = interes.toFixed(2);
+        let interesMostrado = interes.toFixed(2);
 
         let capitalAmortizado = cuota - interes;
-        capitalAmortizado = capitalAmortizado.toFixed(2);
+        let capitalAmortizadoMostrado = capitalAmortizado.toFixed(2);
 
         capitalVivo -= capitalAmortizado;
+        let capitalVivoMostrado= capitalVivo.toFixed(2)
 
-        if (capitalVivo < 0 ) {
-            capitalVivo=0
+        if (capitalVivoMostrado <= 0 ) {
+            capitalVivoMostrado=0
         }
 
         const cuotaObjeto = {
@@ -59,15 +61,20 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
             cuota: cuota,
             interes: interes,
             capitalAmortizado: capitalAmortizado,
-            capitalVivo: capitalVivo
+            capitalVivo: capitalVivo,
+            interesMostrado: interesMostrado,
+            capitalAmortizadoMostrado: capitalAmortizadoMostrado,
+            capitalVivoMostrado: capitalVivoMostrado
         };
 
         resultados.push(cuotaObjeto)
     }
-
+     // este for busca los datos dentro del array "resultados" y los muestra en una tabla
     for (let i = 0; i < resultados.length; i++) {
-        tabla.innerHTML += `<tr><td>${resultados[i].numeroCuota}</td><td>${resultados[i].cuota.toFixed(2)}</td><td>${resultados[i].interes}</td><td>${resultados[i].capitalAmortizado}</td><td>${resultados[i].capitalVivo.toFixed(2)}</td></tr>`;
+        tabla.innerHTML += `<tr><td>${resultados[i].numeroCuota}</td><td>${resultados[i].cuota.toFixed(2)}</td><td>${resultados[i].interesMostrado}</td><td>${resultados[i].capitalAmortizadoMostrado}</td><td>${resultados[i].capitalVivoMostrado}</td></tr>`;
     }
 
     tabla.innerHTML += "</table>";
+
+    console.log(resultados)
 });
