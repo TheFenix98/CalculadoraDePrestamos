@@ -28,6 +28,8 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
 
     cuota = calcularCuota(prestamo.prestamoPedido, prestamo.tasaDeInteres, prestamo.periodo); // Asignación de cuota
 
+    let cuotaMostrada=  "$" + cuota.toFixed(2)
+
     const tasaPeriodica = prestamo.tasaDeInteres / 12;
     
     const tabla = document.getElementById("cuadroAmortizacion")
@@ -44,13 +46,13 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
         //duplique las variables para que los calculos se hagan teniendo en cuenta todos los decimales y poder obtener un reseltado exacto
         // en la tabla se muestran los resultados redondeados a 2 decimales para una mejor visualizacion
         let interes = capitalVivo * tasaPeriodica;
-        let interesMostrado = interes.toFixed(2);
+        let interesMostrado = "$ " + interes.toFixed(2);
 
         let capitalAmortizado = cuota - interes;
-        let capitalAmortizadoMostrado = capitalAmortizado.toFixed(2);
+        let capitalAmortizadoMostrado = "$ " + capitalAmortizado.toFixed(2);
 
         capitalVivo -= capitalAmortizado;
-        let capitalVivoMostrado= capitalVivo.toFixed(2)
+        let capitalVivoMostrado= "$ " + capitalVivo.toFixed(2)
 
         if (capitalVivoMostrado <= 0 ) {
             capitalVivoMostrado=0
@@ -64,14 +66,15 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
             capitalVivo: capitalVivo,
             interesMostrado: interesMostrado,
             capitalAmortizadoMostrado: capitalAmortizadoMostrado,
-            capitalVivoMostrado: capitalVivoMostrado
+            capitalVivoMostrado: capitalVivoMostrado,
+            cuotaMostrada:cuotaMostrada
         };
 
         resultados.push(cuotaObjeto)
     }
      // este for busca los datos dentro del array "resultados" y los muestra en una tabla
     for (let i = 0; i < resultados.length; i++) {
-        tabla.innerHTML += `<tr><td>${resultados[i].numeroCuota}</td><td>${resultados[i].cuota.toFixed(2)}</td><td>${resultados[i].interesMostrado}</td><td>${resultados[i].capitalAmortizadoMostrado}</td><td>${resultados[i].capitalVivoMostrado}</td></tr>`;
+        tabla.innerHTML += `<tr><td>${resultados[i].numeroCuota}</td><td>${resultados[i].cuotaMostrada}</td><td>${resultados[i].interesMostrado}</td><td>${resultados[i].capitalAmortizadoMostrado}</td><td>${resultados[i].capitalVivoMostrado}</td></tr>`;
     }
 
     tabla.innerHTML += "</table>";
