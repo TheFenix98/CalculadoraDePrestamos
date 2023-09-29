@@ -78,6 +78,23 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
     }
 
     tabla.innerHTML += "</table>";
+    
 
-    console.log(resultados)
-});
+    document.getElementById("buscarCuotaBtn").addEventListener("click", function () {
+        const numeroCuotaBuscar = parseInt(document.getElementById("numeroCuotaBuscar").value);
+        const cuotaEncontrada = resultados.find(function (cuotaObjeto) {
+            return cuotaObjeto.numeroCuota === numeroCuotaBuscar;
+        });
+    
+        if (cuotaEncontrada) {
+            const mensaje = `Cuota encontrada:\n` +
+                `N° de Cuota: ${cuotaEncontrada.numeroCuota}\n` +
+                `Cuota a pagar: ${cuotaEncontrada.cuotaMostrada}\n` +
+                `Intereses: ${cuotaEncontrada.interesMostrado}\n` +
+                `Capital amortizado: ${cuotaEncontrada.capitalAmortizadoMostrado}\n` +
+                `Capital vivo: ${cuotaEncontrada.capitalVivoMostrado}`;
+            alert(mensaje);
+        } else {
+            alert("Cuota no encontrada.");
+        }
+    })})
