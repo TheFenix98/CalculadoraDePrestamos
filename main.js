@@ -2,6 +2,18 @@ let cuota = 0; // Declaración de cuota fuera del evento submit
 
 let resultados = []
 
+const tabla = document.getElementById("cuadroAmortizacion");
+
+// Comprueba si ya hay datos en localStorage
+const resultadosEnLS = JSON.parse(localStorage.getItem("arrayResultados"));
+if (resultadosEnLS && resultadosEnLS.length > 0) {
+    tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr><tr><td>0</td><td>-</td><td>-</td><td>-</td><td>"  + resultadosEnLS[0]+ "</td></tr></table>";
+    for (let i = 1; i < resultadosEnLS.length; i++) {
+        tabla.innerHTML += `<tr><td>${resultadosEnLS[i].numeroCuota}</td><td>${resultadosEnLS[i].cuotaMostrada}</td><td>${resultadosEnLS[i].interesMostrado}</td><td>${resultadosEnLS[i].capitalAmortizadoMostrado}</td><td>${resultadosEnLS[i].capitalVivoMostrado}</td></tr>`;
+    }
+} else {
+    tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr></table>";
+}
 document.getElementById("miFormulario").addEventListener("submit", function (event) {
     event.preventDefault();
     const prestamo = {
@@ -11,6 +23,11 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
         
     }
     let capitalIniciialMostado= "$ " + prestamo.prestamoPedido
+
+    const objCapitalInicial= {
+        capitalIniciialMostado:capitalIniciialMostado
+    }
+    resultados.push(objCapitalInicial)
     if (prestamo.prestamoPedido < 100000) {
         alert("El monto ingresado debe ser mayor a $100,000. Intente de nuevo");
         return; // Salir de la función si no se cumple la condición
@@ -72,9 +89,13 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
 
         resultados.push(cuotaObjeto)
     }
-     // este for busca los datos dentro del array "resultados" y los muestra en una tabla
-    for (let i = 0; i < resultados.length; i++) {
-        tabla.innerHTML += `<tr><td>${resultados[i].numeroCuota}</td><td>${resultados[i].cuotaMostrada}</td><td>${resultados[i].interesMostrado}</td><td>${resultados[i].capitalAmortizadoMostrado}</td><td>${resultados[i].capitalVivoMostrado}</td></tr>`;
+
+    localStorage.setItem("arrayResultados", JSON.stringify(resultados)) 
+    const resultadosEnLS =JSON.parse(localStorage.getItem("arrayResultados"))
+    console.log(resultadosEnLS)
+     // este for busca los datos dentro del array "resultadosEnLs" y los muestra en una tabla
+    for (let i = 1; i < resultadosEnLS.length; i++) {
+        tabla.innerHTML += `<tr><td>${resultadosEnLS[i].numeroCuota}</td><td>${resultadosEnLS[i].cuotaMostrada}</td><td>${resultadosEnLS[i].interesMostrado}</td><td>${resultadosEnLS[i].capitalAmortizadoMostrado}</td><td>${resultadosEnLS[i].capitalVivoMostrado}</td></tr>`;
     }
 
     tabla.innerHTML += "</table>";
