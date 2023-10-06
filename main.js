@@ -7,7 +7,7 @@ const tabla = document.getElementById("cuadroAmortizacion");
 // Comprueba si ya hay datos en localStorage
 const resultadosEnLS = JSON.parse(localStorage.getItem("arrayResultados"));
 if (resultadosEnLS && resultadosEnLS.length > 0) {
-    tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr><tr><td>0</td><td>-</td><td>-</td><td>-</td><td>"  + resultadosEnLS[0]+ "</td></tr></table>";
+    tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr><tr><td>0</td><td>-</td><td>-</td><td>-</td><td>"  + resultadosEnLS[0].capitalIniciialMostado+ "</td></tr></table>";
     for (let i = 1; i < resultadosEnLS.length; i++) {
         tabla.innerHTML += `<tr><td>${resultadosEnLS[i].numeroCuota}</td><td>${resultadosEnLS[i].cuotaMostrada}</td><td>${resultadosEnLS[i].interesMostrado}</td><td>${resultadosEnLS[i].capitalAmortizadoMostrado}</td><td>${resultadosEnLS[i].capitalVivoMostrado}</td></tr>`;
     }
@@ -24,10 +24,12 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
     }
     let capitalIniciialMostado= "$ " + prestamo.prestamoPedido
 
-    const objCapitalInicial= {
-        capitalIniciialMostado:capitalIniciialMostado
-    }
-    resultados.push(objCapitalInicial)
+    const objCapitalInicial = {
+        capitalIniciialMostado: capitalIniciialMostado
+    };
+    resultados.push(objCapitalInicial);
+    
+    
     if (prestamo.prestamoPedido < 100000) {
         alert("El monto ingresado debe ser mayor a $100,000. Intente de nuevo");
         return; // Salir de la función si no se cumple la condición
