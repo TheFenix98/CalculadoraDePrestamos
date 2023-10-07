@@ -93,14 +93,14 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
     }
 
     localStorage.setItem("arrayResultados", JSON.stringify(resultados)) 
-    const resultadosEnLS =JSON.parse(localStorage.getItem("arrayResultados"))
+    
     console.log(resultadosEnLS)
      // este for busca los datos dentro del array "resultadosEnLs" y los muestra en una tabla
     for (let i = 1; i < resultadosEnLS.length; i++) {
         tabla.innerHTML += `<tr><td>${resultadosEnLS[i].numeroCuota}</td><td>${resultadosEnLS[i].cuotaMostrada}</td><td>${resultadosEnLS[i].interesMostrado}</td><td>${resultadosEnLS[i].capitalAmortizadoMostrado}</td><td>${resultadosEnLS[i].capitalVivoMostrado}</td></tr>`;
     }
 
-    tabla.innerHTML += "</table>";
+    
     
 
     document.getElementById("buscarCuotaBtn").addEventListener("click", function () {
