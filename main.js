@@ -105,19 +105,31 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
 
     document.getElementById("buscarCuotaBtn").addEventListener("click", function () {
         const numeroCuotaBuscar = parseInt(document.getElementById("numeroCuotaBuscar").value);
-        const cuotaEncontrada = resultados.find(function (cuotaObjeto) {
-            return cuotaObjeto.numeroCuota === numeroCuotaBuscar;
-        });
+        const cuotaEncontrada = resultados.find((cuotaObjeto) => cuotaObjeto.numeroCuota === numeroCuotaBuscar);
+        
+        const tablaCuotaEncontrada = document.getElementById("cuotaEncontrada");
     
         if (cuotaEncontrada) {
-            const mensaje = `Cuota encontrada:\n` +
-                `N° de Cuota: ${cuotaEncontrada.numeroCuota}\n` +
-                `Cuota a pagar: ${cuotaEncontrada.cuotaMostrada}\n` +
-                `Intereses: ${cuotaEncontrada.interesMostrado}\n` +
-                `Capital amortizado: ${cuotaEncontrada.capitalAmortizadoMostrado}\n` +
-                `Capital vivo: ${cuotaEncontrada.capitalVivoMostrado}`;
-            alert(mensaje);
+            tablaCuotaEncontrada.innerHTML = `
+                <table>
+                    <tr>
+                        <th>N° de Cuota</th>
+                        <th>Cuota a pagar</th>
+                        <th>Intereses</th>
+                        <th>Capital amortizado</th>
+                        <th>Capital vivo</th>
+                    </tr>
+                    <tr>
+                        <td>${cuotaEncontrada.numeroCuota}</td>
+                        <td>${cuotaEncontrada.cuotaMostrada}</td>
+                        <td>${cuotaEncontrada.interesMostrado}</td>
+                        <td>${cuotaEncontrada.capitalAmortizadoMostrado}</td>
+                        <td>${cuotaEncontrada.capitalVivoMostrado}</td>
+                    </tr>
+                </table>
+            `;
         } else {
-            alert("Cuota no encontrada.");
+            tablaCuotaEncontrada.innerHTML = "Cuota no encontrada";
         }
-    })})
+    });
+})
