@@ -3,6 +3,7 @@ let cuota = 0; // Declaración de cuota fuera del evento submit
 let resultados = []
 
 const tabla = document.getElementById("cuadroAmortizacion");
+const tablaCuotaEncontrada = document.getElementById("cuotaEncontrada");
 
 // Comprueba si ya hay datos en localStorage
 const resultadosEnLS = JSON.parse(localStorage.getItem("arrayResultados"));
@@ -16,6 +17,7 @@ if (resultadosEnLS && resultadosEnLS.length > 0) {
 }
 document.getElementById("miFormulario").addEventListener("submit", function (event) {
     event.preventDefault();
+    resultados=[];
     const prestamo = {
         prestamoPedido: parseInt(document.getElementById("monto_prestamo").value),
         periodo: parseInt(document.getElementById("cantidad_cuotas").value),
@@ -52,7 +54,24 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
     const tasaPeriodica = prestamo.tasaDeInteres / 12;
     
     const tabla = document.getElementById("cuadroAmortizacion")
-    tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr><tr><td>0</td><td>-</td><td>-</td><td>-</td><td>"  + capitalIniciialMostado+ "</td></tr>"
+    tabla.innerHTML = `
+    <table>
+        <tr>
+            <th>N° de Cuota</th>
+            <th>Cuota a pagar</th>
+            <th>Intereses</th>
+            <th>Capital amortizado</th>
+            <th>Capital vivo</th>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
+            <td>${capitalIniciialMostado}</td>
+        </tr>
+`;
+
 
     
 
@@ -132,4 +151,14 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
             tablaCuotaEncontrada.innerHTML = "Cuota no encontrada";
         }
     });
+    
 })
+
+document.getElementById("limpiarBtn").addEventListener("click", function(){
+        localStorage.clear();
+        tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr></table>";
+        tablaCuotaEncontrada.innerHTML = "";
+    
+
+})
+
