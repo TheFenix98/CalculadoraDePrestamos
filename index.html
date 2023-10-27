@@ -1,80 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de prestamos</title>
-    <link rel="stylesheet" href="./styles/main.css">
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de prestamos</title>
+  <link rel="stylesheet" href="./styles/main.css">
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Calculadora de prestamos segun metodo de amortizacion frances</h1>
-    <form id="miFormulario">
-        <div class="monto">
+  <h1>Calculadora de prestamos segun metodo de amortizacion frances</h1>
+  <div class="granContenedor">
+    <section>
+      <div class="contenedorFormulario">
+        <form id="miFormulario">
+          <div class="monto">
             <label for="monto_prestamo">Monto del Préstamo:</label>
-            <input type="number" id="monto_prestamo" name="monto_prestamo" >
+            <input type="number" id="monto_prestamo" name="monto_prestamo">
             <p>*El monto del prestamo debe ser de $100.000 como minimo</p>
-        </div>
-        <label for="cantidad_cuotas">Cantidad de Cuotas:</label>
-        <select id="cantidad_cuotas" name="cantidad_cuotas">
+          </div>
+          <label for="cantidad_cuotas">Cantidad de Cuotas:</label>
+          <select id="cantidad_cuotas" name="cantidad_cuotas">
             <option value=""> -----</option>
             <option value="12">12</option>
             <option value="18">18</option>
             <option value="24">24</option>
             <option value="36">36</option>
             <option value="48">48</option>
-        </select>
-        <label for="Tasa_de_interes">Tasa de interes</label> 
-        <div>
+          </select>
+          <label for="Tasa_de_interes">Tasa de interes</label>
+          <div>
             <input type="number" id="tasa_de_interes" name="Tasa_de_interes">
             <span>%</span>
-        </div>
-        <div class="botones">
+          </div>
+          <div class="botones">
             <input id="boton" type="submit" value="Calcular">
             <button id="limpiarBtn">Limpiar</button>
-        </div>
-    </form>
+          </div>
+        </form>
+      </div>
 
-    <table id="cuadroAmortizacion">
-    </table>
+      <div class="contenedorCuadroDeAmortizacion">
 
+        <table id="cuadroAmortizacion">
+        </table>
+      </div>
+    </section>
 
-    
-    
+    <section>
+      <div id="tablaDolar">
+        <table>
+          <tr>
+            <th>Fecha actualizada por ultima vez</th>
+            <th>Valor de compra del dólar</th>
+            <th>Valor de venta del dólar</th>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+  
 
+  <div class="buscadorCuota">
+    <button id="buscarCuotaBtn">Buscar Cuota</button>
+    <input type="number" id="numeroCuotaBuscar" placeholder="Número de Cuota">
 
+    <table id="cuotaEncontrada">
 
-   
-<button id="buscarCuotaBtn">Buscar Cuota</button>
-<input type="number" id="numeroCuotaBuscar" placeholder="Número de Cuota">
-
-<table id="cuotaEncontrada">
-
-</table>
-
-<div id="tablaDolar">
-    <table>
-      <tr>
-        <th>Fecha actualizada por ultima vez</th>
-        <th>Valor de compra del dólar</th>
-        <th>Valor de venta del dólar</th>
-      </tr>
-      <tr>
-        <td></td> 
-        <td></td> 
-        <td></td> 
-      </tr>
     </table>
   </div>
-  
-  
-  
-  
+  </section>
 
-    <script type="module" src="./main.js"> </script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
 
-    <script src="sweetalert2.all.min.js"></script>
+
+
+
+  <script type="module" src="./main.js"> </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
+  <script src="sweetalert2.all.min.js"></script>
 </body>
+
 </html>

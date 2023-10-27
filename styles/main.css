@@ -1,7 +1,7 @@
 form {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 90%;
 }
 
 form input{
@@ -90,3 +90,32 @@ td{ border: 5px solid white;
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.tablaDolar {
+    flex: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+    margin-left: 20px; 
+}
+#dolarTable {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+
+  }
+
+ .granContenedor{
+    display: flex;
+    flex-direction: row;
+ } 
+  
+ section{
+    width: 50%;
+ }
+
+ .buscadorCuota{
+    margin-top: 10px;
+ }
+
+ 
