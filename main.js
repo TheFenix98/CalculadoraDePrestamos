@@ -142,9 +142,17 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
     
     console.log(resultadosEnLS)
      // este for busca los datos dentro del array "resultadosEnLs" y los muestra en una tabla
-    for (let i = 1; i < resultadosEnLS.length; i++) {
-        tabla.innerHTML += `<tr><td>${resultadosEnLS[i].numeroCuota}</td><td>${resultadosEnLS[i].cuotaMostrada}</td><td>${resultadosEnLS[i].interesMostrado}</td><td>${resultadosEnLS[i].capitalAmortizadoMostrado}</td><td>${resultadosEnLS[i].capitalVivoMostrado}</td></tr>`;
-    }})
+     if (resultadosEnLS.length>1) {
+        for (let i = 1; i < resultadosEnLS.length; i++) {
+            tabla.innerHTML += `<tr><td>${resultadosEnLS[i].numeroCuota}</td><td>${resultadosEnLS[i].cuotaMostrada}</td><td>${resultadosEnLS[i].interesMostrado}</td><td>${resultadosEnLS[i].capitalAmortizadoMostrado}</td><td>${resultadosEnLS[i].capitalVivoMostrado}</td></tr>`;
+        }
+     }else{
+        for (let i = 1; i < resultados.length; i++) {
+        tabla.innerHTML += `<tr><td>${resultados[i].numeroCuota}</td><td>${resultados[i].cuotaMostrada}</td><td>${resultados[i].interesMostrado}</td><td>${resultados[i].capitalAmortizadoMostrado}</td><td>${resultados[i].capitalVivoMostrado}</td></tr>`;
+    }
+        
+     }
+    })
 
 
 document.getElementById("buscarCuotaBtn").addEventListener("click", function () {
