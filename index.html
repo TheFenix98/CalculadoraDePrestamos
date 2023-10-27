@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de prestamos</title>
     <link rel="stylesheet" href="./styles/main.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
 </head>
 <body>
     <h1>Calculadora de prestamos segun metodo de amortizacion frances</h1>
     <form id="miFormulario">
         <div class="monto">
             <label for="monto_prestamo">Monto del Préstamo:</label>
-            <input type="number" id="monto_prestamo" name="monto_prestamo" required>
+            <input type="number" id="monto_prestamo" name="monto_prestamo" >
             <p>*El monto del prestamo debe ser de $100.000 como minimo</p>
         </div>
         <label for="cantidad_cuotas">Cantidad de Cuotas:</label>
@@ -51,7 +52,29 @@
 
 </table>
 
-    <script src="./main.js"> </script>
+<div id="tablaDolar">
+    <table>
+      <tr>
+        <th>Fecha actualizada por ultima vez</th>
+        <th>Valor de compra del dólar</th>
+        <th>Valor de venta del dólar</th>
+      </tr>
+      <tr>
+        <td></td> 
+        <td></td> 
+        <td></td> 
+      </tr>
+    </table>
+  </div>
+  
+  
+  
+  
+
+    <script type="module" src="./main.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+
+    <script src="sweetalert2.all.min.js"></script>
 </body>
 </html>
-

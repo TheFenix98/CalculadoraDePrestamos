@@ -6,7 +6,11 @@ const tabla = document.getElementById("cuadroAmortizacion");
 const tablaCuotaEncontrada = document.getElementById("cuotaEncontrada");
 
 // Comprueba si ya hay datos en localStorage
-const resultadosEnLS = JSON.parse(localStorage.getItem("arrayResultados"));
+let resultadosEnLS = JSON.parse(localStorage.getItem("arrayResultados"));
+if (!resultadosEnLS) {
+  resultadosEnLS = []; // Inicializa como un array vacío si no se encuentra en localStorage
+}
+
 if (resultadosEnLS && resultadosEnLS.length > 0) {
     tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr><tr><td>0</td><td>-</td><td>-</td><td>-</td><td>"  + resultadosEnLS[0].capitalIniciialMostado+ "</td></tr></table>";
     for (let i = 1; i < resultadosEnLS.length; i++) {
@@ -15,6 +19,35 @@ if (resultadosEnLS && resultadosEnLS.length > 0) {
 } else {
     tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr></table>";
 }
+
+fetch("https://dolarapi.com/v1/dolares/blue")
+  .then(response => response.json())
+  .then(data => {
+    const valorCompra = data.compra; 
+    const valorVenta = data.venta;   
+    
+
+    const tablaDolar = document.getElementById("tablaDolar");
+    const fila = tablaDolar.querySelectorAll("tr")[1]; 
+
+    
+    const fechaActualizada = data.fechaActualizacion
+    const partesFecha= fechaActualizada.split("T")
+    const fechaActualizadaSoloFecha= partesFecha[0]
+
+    
+    fila.cells[0].textContent = fechaActualizadaSoloFecha;
+    fila.cells[1].textContent = `$${valorCompra} ARS`;
+    fila.cells[2].textContent = `$${valorVenta} ARS`;
+  });
+
+
+
+
+
+
+
+
 document.getElementById("miFormulario").addEventListener("submit", function (event) {
     event.preventDefault();
     resultados=[];
@@ -22,7 +55,11 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
         prestamoPedido: parseInt(document.getElementById("monto_prestamo").value),
         periodo: parseInt(document.getElementById("cantidad_cuotas").value),
         tasaDeInteres: document.getElementById("tasa_de_interes").value / 100,
-        
+    }
+
+    if (prestamo.prestamoPedido <= 0 || prestamo.prestamoPedido ==="" || prestamo.periodo == 0 || prestamo.periodo==="" || prestamo.tasaDeInteres === 0 || prestamo.tasaDeInteres=== "") {
+        Swal.fire('Por favor, complete el formulario', 'Ninguno de los campos puede estar vacio o ser igual a 0', 'error');
+        return;
     }
     let capitalIniciialMostado= "$ " + prestamo.prestamoPedido
 
@@ -33,7 +70,7 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
     
     
     if (prestamo.prestamoPedido < 100000) {
-        alert("El monto ingresado debe ser mayor a $100,000. Intente de nuevo");
+        Swal.fire('Modifique el monto', 'El monto del prestamo no puede ser menor a $100.000', 'error');
         return; // Salir de la función si no se cumple la condición
     }
 
@@ -117,48 +154,45 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
      // este for busca los datos dentro del array "resultadosEnLs" y los muestra en una tabla
     for (let i = 1; i < resultadosEnLS.length; i++) {
         tabla.innerHTML += `<tr><td>${resultadosEnLS[i].numeroCuota}</td><td>${resultadosEnLS[i].cuotaMostrada}</td><td>${resultadosEnLS[i].interesMostrado}</td><td>${resultadosEnLS[i].capitalAmortizadoMostrado}</td><td>${resultadosEnLS[i].capitalVivoMostrado}</td></tr>`;
+    }})
+
+
+document.getElementById("buscarCuotaBtn").addEventListener("click", function () {
+    const numeroCuotaBuscar = parseInt(document.getElementById("numeroCuotaBuscar").value);
+    const cuotaEncontrada = resultadosEnLS.find((cuotaObjeto) => cuotaObjeto.numeroCuota === numeroCuotaBuscar);
+
+    const tablaCuotaEncontrada = document.getElementById("cuotaEncontrada");
+
+    if (cuotaEncontrada) {
+        tablaCuotaEncontrada.innerHTML = `
+            <table>
+                <tr>
+                    <th>N° de Cuota</th>
+                    <th>Cuota a pagar</th>
+                    <th>Intereses</th>
+                    <th>Capital amortizado</th>
+                    <th>Capital vivo</th>
+                </tr>
+                <tr>
+                    <td>${cuotaEncontrada.numeroCuota}</td>
+                    <td>${cuotaEncontrada.cuotaMostrada}</td>
+                    <td>${cuotaEncontrada.interesMostrado}</td>
+                    <td>${cuotaEncontrada.capitalAmortizadoMostrado}</td>
+                    <td>${cuotaEncontrada.capitalVivoMostrado}</td>
+                </tr>
+            </table>
+        `;
+    } else {
+        tablaCuotaEncontrada.innerHTML = "Cuota no encontrada";
     }
+});
 
-    
-    
 
-    document.getElementById("buscarCuotaBtn").addEventListener("click", function () {
-        const numeroCuotaBuscar = parseInt(document.getElementById("numeroCuotaBuscar").value);
-        const cuotaEncontrada = resultados.find((cuotaObjeto) => cuotaObjeto.numeroCuota === numeroCuotaBuscar);
-        
-        const tablaCuotaEncontrada = document.getElementById("cuotaEncontrada");
-    
-        if (cuotaEncontrada) {
-            tablaCuotaEncontrada.innerHTML = `
-                <table>
-                    <tr>
-                        <th>N° de Cuota</th>
-                        <th>Cuota a pagar</th>
-                        <th>Intereses</th>
-                        <th>Capital amortizado</th>
-                        <th>Capital vivo</th>
-                    </tr>
-                    <tr>
-                        <td>${cuotaEncontrada.numeroCuota}</td>
-                        <td>${cuotaEncontrada.cuotaMostrada}</td>
-                        <td>${cuotaEncontrada.interesMostrado}</td>
-                        <td>${cuotaEncontrada.capitalAmortizadoMostrado}</td>
-                        <td>${cuotaEncontrada.capitalVivoMostrado}</td>
-                    </tr>
-                </table>
-            `;
-        } else {
-            tablaCuotaEncontrada.innerHTML = "Cuota no encontrada";
-        }
-    });
-    
-})
+
 
 document.getElementById("limpiarBtn").addEventListener("click", function(){
         localStorage.clear();
         tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr></table>";
-        tablaCuotaEncontrada.innerHTML = "";
+        tablaCuotaEncontrada.innerHTML += "";
     
-
 })
-
