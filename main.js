@@ -41,13 +41,6 @@ fetch("https://dolarapi.com/v1/dolares/blue")
     fila.cells[2].textContent = `$${valorVenta} ARS`;
   });
 
-
-
-
-
-
-
-
 document.getElementById("miFormulario").addEventListener("submit", function (event) {
     event.preventDefault();
     resultados=[];
@@ -108,9 +101,6 @@ document.getElementById("miFormulario").addEventListener("submit", function (eve
             <td>${capitalIniciialMostado}</td>
         </tr>
 `;
-
-
-    
 
 
     let capitalVivo = prestamo.prestamoPedido;
@@ -183,11 +173,15 @@ document.getElementById("buscarCuotaBtn").addEventListener("click", function () 
             </table>
         `;
     } else {
-        tablaCuotaEncontrada.innerHTML = "Cuota no encontrada";
+        Swal.fire({
+            icon: 'warning',
+            title: 'Cuota no encontrada',
+            text: 'La cuota que esta buscando no existe',
+            timer: '2000',
+            showConfirmButton: false,
+        });
     }
 });
-
-
 
 
 document.getElementById("limpiarBtn").addEventListener("click", function(){
