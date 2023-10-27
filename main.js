@@ -184,9 +184,10 @@ document.getElementById("buscarCuotaBtn").addEventListener("click", function () 
 });
 
 
-document.getElementById("limpiarBtn").addEventListener("click", function(){
+document.getElementById("limpiarBtn").addEventListener("click", function() {
+    if (resultadosEnLS.length > 0) {
         localStorage.clear();
-        tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr></table>";
-        tablaCuotaEncontrada.innerHTML += "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr></table>"
-    
-})
+    }
+    tabla.innerHTML = "<table><tr><th>N° de Cuota</th><th>Cuota a pagar</th><th>Intereses</th><th>Capital amortizado</th><th>Capital vivo</th></tr></table>";
+    tablaCuotaEncontrada.innerHTML = "";
+});
